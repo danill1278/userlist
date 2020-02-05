@@ -1,0 +1,10 @@
+
+<mat-menu #appMenu="matMenu" yPosition="above">
+    <button [routerLink]="['/userslist']" mat-menu-item>List of users</button>
+</mat-menu>
+ 
+<button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+
+<router-outlet></router-outlet>

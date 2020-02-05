@@ -1,0 +1,16 @@
+<div [ngClass]="'user-list'">
+    <mat-card [ngClass]="'user-list__items'" *ngFor="let user of userList$ | async">    
+        <mat-card-title>
+            {{user.name}} 
+            {{user.surname}} 
+        </mat-card-title>
+        <mat-card-content>
+            {{user.email}}
+            {{user.address}}
+            {{user.id}}
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button color="primary" [routerLink]="'user/'+user.id">Show User Page</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
