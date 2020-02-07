@@ -56,10 +56,7 @@ export class UsersFormComponent implements OnInit {
   }
 
   get address() {
-    return this.userForm.get('address');
-
-    console.log(this.userForm);
-    
+    return this.userForm.get('address');    
   }
 
 }

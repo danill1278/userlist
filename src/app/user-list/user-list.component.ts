@@ -11,9 +11,7 @@ export class UserListComponent implements OnInit {
   public userList$: Observable<any>;
   constructor(private usersService: UsersService) { }
 
-  ngOnInit() {    
-    console.log('SMTH11');
-    
+  ngOnInit() {
     this.userList$ = this.usersService.getUsers();    
   }
 }
