@@ -35,8 +35,9 @@ export class UsersService {
     })
   }
 
-  getUsers() {
+  init() {}
 
+  getUsers() {
     return !this._users$.getValue() ? this.http.get(this.urlConfig).pipe(
       tap((data) => this._users$.next(data)),
       switchMap(() => this.users$)

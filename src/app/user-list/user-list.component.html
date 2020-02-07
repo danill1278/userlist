@@ -1,5 +1,5 @@
 <div [ngClass]="'user-list'">
-    <mat-card [ngClass]="'user-list__items'" *ngFor="let user of userList$ | async">    
+    <mat-card [ngClass]="'user-list__items'" *ngFor="let user of userList">    
         <mat-card-title>
             {{user.name}} 
             {{user.surname}} 
