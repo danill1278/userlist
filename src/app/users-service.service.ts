@@ -1,13 +1,14 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject, BehaviorSubject } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { tap, switchMap, filter } from 'rxjs/operators';
 
 interface IUser {
   name: string;
   age: string;
   email: string;
   address: string;
+  id: number
 }
 
 @Injectable({
@@ -15,23 +16,26 @@ interface IUser {
 })
 
 export class UsersService {
-  users: IUser[];
   private urlConfig: string = 'https://my-json-server.typicode.com/danill1278/jsonserver/users';
 
   private _users$ = new BehaviorSubject(undefined);
-  public users$ = this._users$.asObservable().pipe(tap((val) =>  console.log('in service', val)));
-
-  constructor(private http: HttpClient) { } 
-
+  public users$ = this._users$.asObservable();
   
 
+  constructor(private http: HttpClient) { }  
+
   addUser(user: IUser) {
-    this.http.post(this.urlConfig, user).subscribe((value) => {
+    this.http.post(this.urlConfig, user).subscribe(() => {
+      this._users$.next([...(this._users$.getValue() || []), user]);
     });
   }
 
-  deleteUser(id: number) {
-    this.http.delete(`${this.urlConfig}/${id}`).subscribe((value) => {
+  deleteUser(name: number) {
+    this.http.delete(`${this.urlConfig}/${1}`)
+    .subscribe((users) => {  
+      this._users$.next( this._users$.getValue().filter((user) =>  {
+        return  user.name !== name;
+      }))
     })
   }
 
