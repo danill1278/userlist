@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 
 interface IUser {
@@ -19,7 +19,7 @@ export class UsersService {
   private urlConfig: string = 'https://my-json-server.typicode.com/danill1278/jsonserver/users';
 
   private _users$ = new BehaviorSubject(undefined);
-  public users$ = this._users$.asObservable().pipe(tap((val) =>  console.log('in service', val)));
+  public users$ = this._users$.asObservable();
 
   constructor(private http: HttpClient) { } 
 
@@ -36,6 +36,7 @@ export class UsersService {
   }
 
   getUsers() {
+
     return !this._users$.getValue() ? this.http.get(this.urlConfig).pipe(
       tap((data) => this._users$.next(data)),
       switchMap(() => this.users$)

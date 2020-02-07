@@ -12,8 +12,6 @@ export class UserListComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {    
-    console.log('SMTH11');
-    
     this.userList$ = this.usersService.getUsers();    
   }
 }
