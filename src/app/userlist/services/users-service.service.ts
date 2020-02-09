@@ -8,6 +8,7 @@ interface IUser {
   age: string;
   email: string;
   address: string;
+  id?: number
 }
 
 @Injectable({
@@ -25,19 +26,28 @@ export class UsersService {
 
   
 
-  addUser(user: IUser) {
-    this.http.post(this.urlConfig, user).subscribe((value) => {
-    });
+  addUser(user: IUser) {     
+    let updatedUser = {...user}
+    updatedUser.id = Date.now();
+    
+    this._users$.next([...(this._users$.getValue()), updatedUser]);      
+    return updatedUser;
   }
 
-  deleteUser(id: number) {
-    this.http.delete(`${this.urlConfig}/${id}`).subscribe((value) => {
-    })
+  getUser(id: number | string) {
+    const user = this._users$.getValue().find( user => user.id === id );
+    return user;      
+  }
+
+  deleteUser(id: number | string) {  
+    let usersListUpdated = this._users$.getValue().filter(user => user.id !== id);
+    this._users$.next(usersListUpdated); 
+    return this.users$;
   }
 
   init() {}
 
-  getUsers() {
+  getUsers() {   
     return !this._users$.getValue() ? this.http.get(this.urlConfig).pipe(
       tap((data) => this._users$.next(data)),
       switchMap(() => this.users$)

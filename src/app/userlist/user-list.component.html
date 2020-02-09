@@ -1,0 +1,4 @@
+<h2 class="user-list__heading">Users List</h2>
+<div [ngClass]="'user-list'">
+    <app-user-card [ngClass]="'user-list__items'" [userData]="user" *ngFor="let user of userList | async"></app-user-card>
+</div>

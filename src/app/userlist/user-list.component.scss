@@ -1,0 +1,12 @@
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    &__items {
+        box-sizing: border-box;;
+        width: calc(33.33333% - 20px);
+        margin: 10px;
+    }
+    &__heading {
+        text-align: center;
+    }
+}

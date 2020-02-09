@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { Routes, RouterModule } from '@angular/router';
+import {AppRoutingModule} from './app-routing.module';
 
 import { HttpClientModule }    from '@angular/common/http';
 
@@ -10,7 +10,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule }   from '@angular/forms';
 import { UsersFormComponent } from './users-form/users-form.component';
-import { UserListComponent } from './user-list/user-list.component';
+import { UserListComponent } from './userlist/user-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,23 +19,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-
-const appRoutes: Routes = [
-  { path: '', component: UsersFormComponent },
-  { path: 'userslist', component: UserListComponent }  
-];
+import { UserlistModule } from './userlist/userlist.module';
+import { UserDetailedComponent } from './user-detailed/user-detailed.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UsersFormComponent,
-    UserListComponent    
-  ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(
-      appRoutes
-    ),
     NoopAnimationsModule,
     MatMenuModule,
     MatIconModule,
@@ -45,8 +35,17 @@ const appRoutes: Routes = [
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    UserlistModule,
+    AppRoutingModule
   ],
+  declarations: [
+    AppComponent,
+    UsersFormComponent,
+    UserListComponent,
+    UserDetailedComponent,
+    UserCardComponent    
+  ],  
   providers: [],
   bootstrap: [AppComponent]
 })
