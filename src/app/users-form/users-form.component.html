@@ -13,16 +13,34 @@
         </mat-form-field>    
     </div>
     <div>
+        <div [ngClass]="'error-message'" *ngIf="surname.invalid && (surname.dirty || surname.touched)">
+            <div *ngIf="surname.errors.required">
+                Surname is required.
+            </div>
+            <div *ngIf="surname.errors.minlength">
+                Surname must be at least 4 characters long.
+            </div>
+        </div> 
         <mat-form-field>
             <input matInput placeholder="Surname" formControlName="surname">
         </mat-form-field>  
     </div>
     <div>
+        <div [ngClass]="'error-message'" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors.required">
+                Email is required.
+            </div>
+        </div> 
         <mat-form-field>
             <input matInput type="email" placeholder="Email" formControlName="email">
         </mat-form-field>
     </div>
     <div>
+        <div [ngClass]="'error-message'" *ngIf="address.invalid && (address.dirty || address.touched)">
+            <div *ngIf="address.errors.required">
+                Address is required.
+            </div>
+        </div> 
         <mat-form-field>
             <input matInput placeholder="Address" formControlName="address">
         </mat-form-field>

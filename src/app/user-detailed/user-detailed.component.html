@@ -1,0 +1,16 @@
+<div class="user-detailed">
+    <mat-card>
+        <mat-card-title>
+            {{userDetails.name}} 
+            {{userDetails.surname}} 
+        </mat-card-title>
+        <mat-card-content>
+            {{userDetails.email}}
+            {{userDetails.address}}
+            {{userDetails.id}}
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button  color="primary" (click)="deleteUser()">Delete User</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

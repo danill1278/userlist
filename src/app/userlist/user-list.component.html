@@ -1,0 +1,9 @@
+<div class="user-list-box">
+    <h2 class="user-list__heading">Users List</h2>
+    <app-search-box (filterChanges)="filterUserList($name)"></app-search-box>
+    <div *ngIf="userList.length; else noUsers" [ngClass]="'user-list'">
+        <app-user-card [ngClass]="'user-list__items'" [userData]="user" *ngFor="let user of userList"></app-user-card>
+    </div>
+    
+    <ng-template #noUsers>Please add users to list</ng-template>
+</div>

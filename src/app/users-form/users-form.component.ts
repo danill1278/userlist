@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { UsersService } from '../users-service.service';
+import { Router } from '@angular/router';
 
+import { UsersService } from '../userlist/services/users-service.service';
+interface IUser {
+  id: number
+}
 @Component({
   selector: 'app-users-form',
   templateUrl: './users-form.component.html',
@@ -32,16 +36,17 @@ export class UsersFormComponent implements OnInit {
     ])
   });
 
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private router: Router
+    ) { }
   
   ngOnInit() {}
 
-  onSubmit() {  
-    this.usersService.addUser(this.userForm.value);
-    console.warn();
-  }
-
-  
+  onSubmit() {
+    let user =  this.usersService.addUser(this.userForm.value);          
+    this.router.navigate([`/userslist/${user.id}`]);       
+  }  
 
   get name() {
     return this.userForm.get('name');
